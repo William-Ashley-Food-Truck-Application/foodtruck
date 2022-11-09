@@ -1,0 +1,108 @@
+body {
+    /*background-color: white;*/
+    /*color: black;*/
+    background-color: #121212;
+    color: #FFFFFF;
+}
+
+nav {
+    /*background-color:  #a8d0e6;*/
+    /*font-size: 1.25em;*/
+}
+
+.no-focus:focus {
+
+}
+
+
+nav a {
+    padding: 0 .5em;
+    color: #FFFFFF;
+    /*color: black;*/
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #FFFFFF;
+    opacity: .75;
+}
+
+.author-categories {
+    width: 25%;
+}
+
+.categories a {
+    font-size: .75em;
+    color: #FFFFFF;
+    opacity: .8;
+}
+
+.create-input {
+    width: 100%;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    padding: .375rem .75rem;
+    color: #FFFFFF;
+}
+
+
+.navbar {
+    /*background-color: #a8d0e6;*/
+    color: #FFFFFF;
+}
+
+.nav-link {
+    color: #FFFFFF;
+}
+
+.card {
+}
+
+.card-header{
+}
+
+.card-body {
+}
+
+.form-select {
+    width: 25%;
+    background-color: #404040;
+    color: #FFFFFF;
+}
+
+.register-card {
+    top: 4em;
+}
+
+.login-card {
+    top: 4em;
+}
+
+.profile-password {
+    background-color: black;
+    width: min-content;
+}
+
+.profile-password:hover {
+    background-color: white;
+}
+
+.background-dark {
+    background-color: #121212;
+}
+
+.background-bar-dark {
+    background-color: #282828;
+}
+
+.background-btn-dark {
+    background-color: #181818;
+}
+
+.background-card-dark {
+    background-color: #404040;
+}
+
+.register-card{
+    color: #FFFFFF;
+}

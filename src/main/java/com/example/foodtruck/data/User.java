@@ -18,7 +18,7 @@ import java.util.Collection;
 @ToString
 
 @Entity
-@Table(name = "users")
+@Table(name = "foodtruckUsers")
 public class User {
 
     @Id
@@ -28,6 +28,9 @@ public class User {
     @Email
     @NotEmpty
     private String email;
+
+    @Column
+    private String phoneNumber;
 
 //    @Column(nullable = false)
     @ToString.Exclude
@@ -40,7 +43,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    Field for cart whenever Product Class is created
+//    Field for cart whenever Product Class is created, one to many realtionship
 //    @Column
 //    private ArrayList<Product> cart;
 

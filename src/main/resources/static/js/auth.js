@@ -84,3 +84,7 @@ export function userRole() {
 
     return false;
 }
+
+export function isAdmin() {
+    return userRole() === 'ADMIN';
+}

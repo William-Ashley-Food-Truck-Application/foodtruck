@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Getter
@@ -24,10 +25,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String username;
-
-
     @Email
     @NotEmpty
     private String email;
@@ -43,14 +40,16 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonIgnoreProperties("author")
-    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @ToString.Exclude
-    private Collection<Post> posts;
+//    Field for cart whenever Product Class is created
+//    @Column
+//    private ArrayList<Product> cart;
+
+//    @JsonIgnoreProperties("author")
+//    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    @ToString.Exclude
+//    private Collection<Post> posts;
 
     public enum Role {USER, ADMIN}
-
-    ;
 
 
 }

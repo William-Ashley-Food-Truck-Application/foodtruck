@@ -54,7 +54,6 @@ public class UsersController {
 
         User userToUpdate = usersRepository.getById(userId);
         userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setUsername(user.getUsername());
         userToUpdate.setRole(user.getRole());
         usersRepository.save(userToUpdate);
 
@@ -72,11 +71,11 @@ public class UsersController {
         return usersRepository.findByEmail(auth.getName());
     }
 
-    @GetMapping("username")
-    @ResponseBody
-    private User getByUsername(@RequestParam String username) {
-        return usersRepository.findByUsername(username);
-    }
+//    @GetMapping("username")
+//    @ResponseBody
+//    private User getByUsername(@RequestParam String username) {
+//        return usersRepository.findByUsername(username);
+//    }
 
     @GetMapping("email")
     @ResponseBody
@@ -95,7 +94,7 @@ public class UsersController {
         userToUpdate.setPassword(encryptedPassword);
         usersRepository.save(userToUpdate);
 
-        System.out.println("Updating the password of user: " + userToUpdate.getUsername() + " to: " + newPassword);
+        System.out.println("Updating the password of user: " + userToUpdate.getEmail() + " to: " + newPassword);
     }
 
 }

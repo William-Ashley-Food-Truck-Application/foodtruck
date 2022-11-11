@@ -22,7 +22,7 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"orders"})
+    @JsonIgnoreProperties({"orders", "cart", "role", "createdAt"})
     private User orderOwner;
 
     @Column

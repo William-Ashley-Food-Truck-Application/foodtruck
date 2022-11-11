@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Getter
@@ -17,20 +18,19 @@ import java.util.Collection;
 @ToString
 
 @Entity
-@Table(name = "users")
+@Table(name = "foodtruckUsers")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String username;
-
-
     @Email
     @NotEmpty
     private String email;
+
+    @Column
+    private String phoneNumber;
 
 //    @Column(nullable = false)
     @ToString.Exclude
@@ -43,14 +43,16 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonIgnoreProperties("author")
-    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @ToString.Exclude
-    private Collection<Post> posts;
+//    Field for cart whenever Product Class is created, one to many realtionship
+//    @Column
+//    private ArrayList<Product> cart;
+
+//    @JsonIgnoreProperties("author")
+//    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    @ToString.Exclude
+//    private Collection<Post> posts;
 
     public enum Role {USER, ADMIN}
-
-    ;
 
 
 }

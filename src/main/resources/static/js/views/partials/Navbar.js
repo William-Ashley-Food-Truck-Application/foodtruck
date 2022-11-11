@@ -1,8 +1,9 @@
-import {isLoggedIn, userRole} from "../../auth.js";
+import {isAdmin, isLoggedIn, userRole} from "../../auth.js";
 
 export default function Navbar(props) {
     console.log(isLoggedIn());
     console.log(userRole());
+
 
 
     let html = `
@@ -43,7 +44,7 @@ export default function Navbar(props) {
                         </li>`
                 }
 
-                if (userRole() == "ADMIN") {
+                if (isAdmin()) {
                     html = html + `
                         <li class="nav-item">
                             <a href="/admin" class="nav-link active" data-link>Admin</a>

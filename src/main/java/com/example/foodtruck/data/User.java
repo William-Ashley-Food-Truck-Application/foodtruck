@@ -1,5 +1,6 @@
 package com.example.foodtruck.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -32,8 +33,7 @@ public class User {
     @Column
     private String phoneNumber;
 
-//    @Column(nullable = false)
-    @ToString.Exclude
+    @JsonIgnore
     private String password;
 
     @Column
@@ -43,9 +43,23 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    Field for cart whenever Product Class is created, one to many realtionship
-//    @Column
-//    private ArrayList<Product> cart;
+    @Column
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
+            targetEntity = Product.class)
+    @JoinTable(
+            name="users_products",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="product_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+    )
+    private Collection<Product> cart;
+
+    @OneToMany(mappedBy = "orderOwner")
+    @JsonIgnoreProperties({"orderOwner"})
+    private Collection<Order> orders;
 
 //    @JsonIgnoreProperties("author")
 //    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE, orphanRemoval = true)

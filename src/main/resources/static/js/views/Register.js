@@ -20,6 +20,10 @@ export default function Register(props) {
                                 <input type="email" class="form-control background-card-dark" id="email" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
+                                <label for="number" class="form-label">Phone Number</label>
+                                <input type="tel" name="number" id="phoneNumber" class="form-control background-card-dark" maxlength="12">
+                            </div>
+                            <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control background-card-dark" id="password">
                             </div>
@@ -33,13 +37,16 @@ export default function Register(props) {
 }
 
 export function RegisterEvent(){
+    // phoneNumberEventListener();
     $("#register-btn").click(function(){
 
         const email = $("#email").val();
-        const password = $("#password").val()
+        const password = $("#password").val();
+        const phoneNumber = $('#phoneNumber').val();
 
         let newUser = {
             email,
+            phoneNumber,
             password
         }
 
@@ -57,5 +64,21 @@ export function RegisterEvent(){
                 CreateView("/");
             })
 
+    })
+}
+
+function phoneNumberEventListener() {
+    $("#phoneNumber").keypress(function (e){
+        if (e.keyCode === 8) {
+            return;
+        }
+        if (e.keyCode < 48 || e.keyCode > 57) {
+            this.value = this.value.slice(0, -1)
+            return;
+        }
+
+        if (this.value.length === 3 || this.value.length === 7) {
+            this.value += "-";
+        }
     })
 }

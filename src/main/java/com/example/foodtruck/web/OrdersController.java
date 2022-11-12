@@ -22,6 +22,10 @@ public class OrdersController {
     public Collection<Order> getAllOrders() {
         return ordersRepository.findAll();
     }
+    @GetMapping("/count")
+    public long orderCount() {
+        return ordersRepository.count();
+    }
 
     /*
         This endpoint gets all orders but by page instead of all at once.

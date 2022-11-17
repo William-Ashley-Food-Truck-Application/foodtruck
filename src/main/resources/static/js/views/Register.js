@@ -16,16 +16,16 @@ export default function Register(props) {
                     <div class="card-body background-card-dark">
                         <form id="register-form">                    
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control background-card-dark" id="email" aria-describedby="emailHelp">
+                                <label for="email" class="form-label">Email <span id="email-warning"></span></label>
+                                <input type="email" class="form-control background-card-dark settingForm" id="email" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="number" class="form-label">Phone Number</label>
-                                <input type="tel" name="number" id="phoneNumber" class="form-control background-card-dark" maxlength="12">
+                                <label for="number" class="form-label">Phone Number <span id="phoneNumberWarning" class="warning mx-2"></span></label>
+                                <input type="tel" name="number" id="phoneNumber" class="form-control background-card-dark settingForm" maxlength="12">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control background-card-dark" id="password">
+                                <label for="password" class="form-label">Password <span id="password-warning"></span></label>
+                                <input type="password" class="form-control background-card-dark settingForm" id="password">
                             </div>
                             <button type="button" class="btn btn-primary" id="register-btn">Register</button>
                         </form>
@@ -39,6 +39,7 @@ export default function Register(props) {
 export function RegisterEvent(){
     phoneNumberEventListener();
     $("#register-btn").click(function(){
+        clearWarnings();
 
         const email = $("#email").val();
         const password = $("#password").val();
@@ -47,7 +48,8 @@ export function RegisterEvent(){
         phoneNumber = formatPhoneNumber(phoneNumber);
 
         if (phoneNumber.length !== 10) {
-            console.log("Phonenumber incorrect!")
+            let phWarning = $("#phoneNumberWarning");
+            phWarning.text("* Phone number incorrect")
             return;
         }
 
@@ -74,9 +76,19 @@ export function RegisterEvent(){
     })
 }
 
+function clearWarnings() {
+    let phWarning = $("#phoneNumberWarning");
+    let eWarning = $("#email-warning");
+    let pWarning = $("#password-warning");
+
+    phWarning.text("");
+    eWarning.text("");
+    pWarning.text("");
+
+}
+
 function phoneNumberEventListener() {
     $("#phoneNumber").keyup(function (e){
-        console.log(e.keyCode);
         if (e.keyCode === 8) {
             return;
         }

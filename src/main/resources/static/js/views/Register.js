@@ -37,12 +37,19 @@ export default function Register(props) {
 }
 
 export function RegisterEvent(){
-    // phoneNumberEventListener();
+    phoneNumberEventListener();
     $("#register-btn").click(function(){
 
         const email = $("#email").val();
         const password = $("#password").val();
-        const phoneNumber = $('#phoneNumber').val();
+        let phoneNumber = $('#phoneNumber').val();
+
+        phoneNumber = formatPhoneNumber(phoneNumber);
+
+        if (phoneNumber.length !== 10) {
+            console.log("Phonenumber incorrect!")
+            return;
+        }
 
         let newUser = {
             email,
@@ -68,17 +75,24 @@ export function RegisterEvent(){
 }
 
 function phoneNumberEventListener() {
-    $("#phoneNumber").keypress(function (e){
+    $("#phoneNumber").keyup(function (e){
+        console.log(e.keyCode);
         if (e.keyCode === 8) {
             return;
         }
-        if (e.keyCode < 48 || e.keyCode > 57) {
+        if (e.keyCode < 48 || e.keyCode > 57 && e.keyCode !== 189) {
             this.value = this.value.slice(0, -1)
-            return;
         }
-
-        if (this.value.length === 3 || this.value.length === 7) {
-            this.value += "-";
-        }
+        //
+        // if (this.value.length === 3 || this.value.length === 7) {
+        //     this.value += "-";
+        // }
     })
+}
+
+function formatPhoneNumber(phonenumber) {
+    if (!phonenumber.includes("-")) {
+        return phonenumber;
+    }
+    return phonenumber.replace(/-/g, '');
 }

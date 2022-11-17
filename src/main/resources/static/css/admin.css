@@ -1,0 +1,31 @@
+.admin-tab {
+    cursor: pointer;
+    list-style: none;
+}
+
+#tabs-container {
+    height: 100vh;
+}
+
+#tabs {
+    margin: 0;
+    padding: 0;
+    font-size: 1.25em;
+}
+
+.highlight {
+    width: 7px;
+    height: 100%;
+
+    position: relative;
+
+    left: 0;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.w-100 {
+    width: 100%;
+}

@@ -5,19 +5,52 @@ export default function Admin(props) {
     console.log(props)
     //language=html
     return `
-        <div class="d-flex">
-            <div>
-                <canvas id="myChart" class="py-2"></canvas>
-            </div>
-            <div>
-                <canvas id="myChart1" class="py-2"></canvas>
+        <div id="admin-container" class="">
+            <div class="row">
+                <div id="tabs-container" class="col-3 background-card-dark">
+                        <ul id="tabs" class="">
+                            <li class="admin-tab d-flex">
+                                <div class="w-25 highlight-container">
+                                    <div class="highlight"></div>
+                                </div>
+                                <div class="w-75">
+                                    <i class="bi bi-box"></i>
+                                    <span class="title mx-3">Dashboard</span>
+                                </div>
+                            </li>
+                            <li class="admin-tab d-flex">
+                                <div class="w-25 highlight-container">
+                                    <div class="highlight"></div>
+                                </div>
+                                <div class="w-75">
+                                    <i class="bi bi-cup-straw"></i>
+                                    <span class="title mx-3">Items</span>
+                                </div>
+                            </li>
+                        </ul>
+                    
+                </div>
+                <div class="col-9">
+                    yuh
+                </div>
             </div>
         </div>
     `;
 }
 
 export function AdminEvents() {
-    populateChart()
+    // populateChart()
+    adminTabListeners()
+}
+
+function adminTabListeners() {
+    $(".admin-tab").click(function (){
+        //reset all background colors ar begining
+        $(".admin-tab").children(".highlight-container").children().css("background-color", "#404040")
+
+        //sets the color of the tab you click to green
+        $(this).children(".highlight-container").children().css("background-color", "#709775");
+    })
 }
 
 function populateChart() {

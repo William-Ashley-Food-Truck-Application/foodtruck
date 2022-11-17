@@ -43,4 +43,7 @@ public class Order {
 
     @Column
     private Double totalPrice;
+
+    @Column(nullable = false)
+    private boolean isPaid;
 }

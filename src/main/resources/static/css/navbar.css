@@ -100,9 +100,18 @@ nav a:hover {
 }
 
 .background-card-dark {
+    display: flex;
     background-color: #404040;
+    margin: 1em;
 }
 
 .register-card{
     color: #FFFFFF;
+}
+.menu-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    max-width: 100%;
+    height: auto;
 }

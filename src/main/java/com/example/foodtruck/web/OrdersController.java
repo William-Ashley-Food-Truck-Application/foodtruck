@@ -27,6 +27,11 @@ public class OrdersController {
         return ordersRepository.count();
     }
 
+    @GetMapping("salesTotal")
+    public Double getSalesTotal() {
+        return ordersRepository.getTotalPrice();
+    }
+
     /*
         This endpoint gets all orders but by page instead of all at once.
         - Pass the page number through as a pathvariable to get which page you want.

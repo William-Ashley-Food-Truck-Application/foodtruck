@@ -1,6 +1,4 @@
 import Home from "./views/Home.js";
-// import PostIndex from "./views/PostIndex.js";
-// import {PostsEvent} from "./views/PostIndex.js";
 import About from "./views/About.js";
 import Error404 from "./views/Error404.js";
 import Loading from "./views/Loading.js";
@@ -11,8 +9,6 @@ import {RegisterEvent} from "./views/Register.js";
 import Profile, {UserEvents} from "./views/UserIndex.js";
 import logout, {logoutEvent} from "./views/logout.js";
 import Admin, {AdminEvents} from "./views/AdminIndex.js";
-import ProductsIndex from "./views/ProductsIndex.js";
-import {ProductsEvent} from "./views/ProductsIndex.js"
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -23,7 +19,9 @@ export default function router(URI) {
     const routes = {
         '/': {
             returnView: Home,
-            state: {},
+            state: {
+                products: '/api/products',
+            },
             uri: '/',
             title: 'Home',
         },
@@ -48,13 +46,7 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/products': {
-            returnView: ProductsIndex,
-            state: {},
-            uri: '/products',
-            title: 'Products',
-            viewEvent: ProductsEvent //<-- Use PostsEvent as a callback here!
-        },
+
         '/about': {
             returnView: About,
             state: {},

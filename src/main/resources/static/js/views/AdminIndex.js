@@ -7,31 +7,30 @@ export default function Admin(props) {
     return `
         <div id="admin-container" class="">
             <div class="row">
-                <div id="tabs-container" class="col-3 background-card-dark">
+                <div id="tabs-container" class="col-2 background-card-dark">
                         <ul id="tabs" class="">
                             <li class="admin-tab d-flex">
-                                <div class="w-25 highlight-container">
-                                    <div class="highlight"></div>
+                                <div class="w-20 highlight-container">
+                                    <div class="dashboard-tab highlight"></div>
                                 </div>
-                                <div class="w-75">
-                                    <i class="bi bi-box"></i>
-                                    <span class="title mx-3">Dashboard</span>
+                                <div class="w-80">
+                                    <i class="bi bi-box mx-1"></i>
+                                    <span class="title mx-1">Dashboard</span>
                                 </div>
                             </li>
                             <li class="admin-tab d-flex">
-                                <div class="w-25 highlight-container">
+                                <div class="w-20 highlight-container">
                                     <div class="highlight"></div>
                                 </div>
-                                <div class="w-75">
+                                <div class="w-80">
                                     <i class="bi bi-cup-straw"></i>
                                     <span class="title mx-3">Items</span>
                                 </div>
                             </li>
                         </ul>
-                    
                 </div>
-                <div class="col-9">
-                    yuh
+                <div class="col-10">
+                    ${dashboardHtml(props)}
                 </div>
             </div>
         </div>
@@ -41,6 +40,10 @@ export default function Admin(props) {
 export function AdminEvents() {
     // populateChart()
     adminTabListeners()
+}
+
+function dashboardHtml(props) {
+
 }
 
 function adminTabListeners() {

@@ -23,11 +23,11 @@ function productHtml(product) {
     console.log(product.name)
     return `
         <div class="card background-card-dark" style="width: 18rem;">
-            <img src="https://s23209.pcdn.co/wp-content/uploads/2019/04/Mexican-Street-TacosIMG_9091.jpg" class="card-img-top" alt="...">
+            <img src=${product.image} class="card-img-top" alt="..." width="400px" height="250px">
             <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.description}</p>
-                <p class="card-text">${product.price}</p>
+                <p class="card-text">$${product.price.toFixed(2)}</p>
                 <a href="#" class="btn btn-primary">Order</a>
             </div>
         </div>

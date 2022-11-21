@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -27,7 +28,7 @@ public class OrdersController {
         return ordersRepository.count();
     }
 
-    @GetMapping("salesTotal")
+    @GetMapping("/salesTotal")
     public Double getSalesTotal() {
         return ordersRepository.getTotalPrice();
     }
@@ -41,7 +42,8 @@ public class OrdersController {
         //creates the Object to get a specific page, the first argument is which page(0 based index) and the second is
         //how many items you want on that search.
         Pageable pageWithTwoElements = PageRequest.of(pageNumber - 1, 2);
-        return ordersRepository.findAll(pageWithTwoElements).getContent();
+        Pageable sortByDateDesc = PageRequest.of(pageNumber - 1, 5, Sort.by("dateOrdered").descending());
+        return ordersRepository.findAll(sortByDateDesc).getContent();
     }
 
     @GetMapping("/getById/{id}")

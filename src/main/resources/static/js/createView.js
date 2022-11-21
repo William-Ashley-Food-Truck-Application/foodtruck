@@ -12,7 +12,7 @@ export default function createView(URI) {
     let route = router(URI);
 
     // Store the title because the loading screen render overwrites it.
-    let currentTitle = document.title;
+    let currentProduct = document.name;
 
     // if route is invalid, return a 404 page
     if (!route) {
@@ -29,7 +29,7 @@ export default function createView(URI) {
     fetchData(route.state, request).then((props) => {
         // Restore the title so that history entries are not all 'Loading...'
         // I tried using route.uri here instead, but it seems there's an off-by-one bug (https://stackoverflow.com/a/38830794)
-        document.title = currentTitle;
+        document.name = currentProduct;
         // Add the current page to the history stack
         history.pushState({...props, lastUri: route.uri }, null, route.uri)
         render(props, route);

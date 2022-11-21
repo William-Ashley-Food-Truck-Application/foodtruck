@@ -1,6 +1,4 @@
 import Home from "./views/Home.js";
-import PostIndex from "./views/PostIndex.js";
-import {PostsEvent} from "./views/PostIndex.js";
 import About from "./views/About.js";
 import Error404 from "./views/Error404.js";
 import Loading from "./views/Loading.js";
@@ -21,7 +19,9 @@ export default function router(URI) {
     const routes = {
         '/': {
             returnView: Home,
-            state: {},
+            state: {
+                products: '/api/products',
+            },
             uri: '/',
             title: 'Home',
         },
@@ -46,16 +46,7 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/posts': {
-            returnView: PostIndex,
-            state: {
-                posts: '/api/posts',
-                categories: '/api/cat'
-            },
-            uri: '/posts',
-            title: 'All Posts',
-            viewEvent: PostsEvent //<-- Use PostsEvent as a callback here!
-        },
+
         '/about': {
             returnView: About,
             state: {},

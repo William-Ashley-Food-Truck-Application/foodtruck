@@ -3,6 +3,13 @@
     list-style: none;
 }
 
+.order-history-list {
+    max-height: 40vh;
+    overflow: scroll;
+
+    color: #b2b2b2;
+}
+
 #tabs-container {
     height: 91vh;
 }

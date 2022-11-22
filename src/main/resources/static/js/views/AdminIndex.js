@@ -1,7 +1,10 @@
+import {getHeaders} from "../auth.js";
+
 const USER_URI = 'http://localhost:8080/api/users';
 const POST_URI = 'http://localhost:8080/api/posts';
 
 let globalProps = {}
+let isFetching = false;
 export default function Admin(props) {
     globalProps = props;
     console.log(props)
@@ -40,6 +43,7 @@ export default function Admin(props) {
 }
 
 export function AdminEvents() {
+    infiniteScrollListener()
     populateBarChart()
     populateDoughnutChart()
     adminTabListeners()
@@ -75,25 +79,26 @@ function newestOrdersHtml(props) {
     console.log(props.orderHistory)
     return `<div class="card background-card-dark m-3">
                 <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between background-card-dark row text-white">
+                    <ul class="list-group list-group-flush order-history-list" data-page="1">
+                        <li class="list-group-item d-flex justify-content-between background-card-dark row text-white my-1">
                             <span class="col-3">Email</span>
                             <span class="col-2">Phone number</span>
                             <span class="col-1">Order#</span>
                             <span class="col-2">Order Total</span>
                             <span class="col-2">Order Date</span>
                         </li>
-                        ${props.orderHistory.map(order => orderListItem(order)).join("")}                       
+                        ${props.orderHistory.map(order => orderListItem(order)).join("")} 
+                                       
                     </ul>
                 </div>
             </div>`
 }
 function orderListItem(order) {
-    return `<li class="list-group-item d-flex justify-content-between background-card-dark row text-white">
+    return `<li class="list-group-item d-flex justify-content-between background-card-dark text-white row my-1">
                             <span class="col-3">${order.orderOwner.email}</span>
-                            <span class="col-2">${order.orderOwner.phoneNumber}</span>
+                            <span class="col-2">${phoneNumberFormatter(order.orderOwner.phoneNumber)}</span>
                             <span class="col-1">${order.id}</span>
-                            <span class="col-2">${order.totalPrice}</span>
+                            <span class="col-2">$${order.totalPrice}</span>
                             <span class="col-2">${order.dateOrdered}</span>
                         </li>`
 }
@@ -204,4 +209,55 @@ function populateDoughnutChart() {
         document.getElementById('donutChart'),
         config
     );
+}
+
+function phoneNumberFormatter(noDashPhonenumber) {
+    return noDashPhonenumber.slice(0, 3) + '-' + noDashPhonenumber.slice(3, 6) + '-' + noDashPhonenumber.slice(6);
+}
+
+function infiniteScrollListener() {
+    document.querySelector('.order-history-list').addEventListener('scroll',()=>{
+        if (isFetching) {
+            return;
+        }
+        // console.log("scrolled")
+        let container = document.querySelector('.order-history-list');
+        let currentPage = container.dataset.page;
+        let scrollY = container.scrollHeight - container.scrollTop;
+        let height = container.offsetHeight;
+        let offset = height - scrollY;
+        // console.log(scrollY)
+        // console.log(height)
+        // console.log(offset)
+        // console.log(currentPage)
+
+        if (offset == 0 || offset >= -1) {
+            isFetching = true;
+            loadMoreOrders(currentPage)
+        }
+    })
+}
+
+function loadMoreOrders(currentPage) {
+    let container = document.querySelector('.order-history-list');
+    let requestObject = {
+        headers: getHeaders()
+    }
+
+    let newPage = parseInt(currentPage) + 1;
+    // console.log(newPage)
+
+    fetch(`http://localhost:8080/api/orders/${newPage}`).then(resp => resp.json()).then(data => {
+        let newOrderArray = data;
+
+        for (let order of newOrderArray) {
+            container.innerHTML += orderListItem(order);
+        }
+
+        container.dataset.page = newPage + "";
+    }).catch(error => {
+        console.log(error)
+    }).finally(() => {
+        isFetching = false;
+    })
 }

@@ -1,0 +1,31 @@
+.warning {
+    color: red;
+    font-size: .75em;
+}
+
+.settingForm {
+    background-color: #404040;
+    color: white;
+}
+
+.settingForm[readonly] {
+    background-color: #404040;
+    color: white;
+}
+
+.settingForm:focus {
+    border-color: #709775;
+    background-color: #404040;
+    color: white;
+    box-shadow: 0 0 0 .1em #709775;
+}
+
+.settingForm:-webkit-autofill,
+.settingForm:-webkit-autofill:hover,
+.settingForm:-webkit-autofill:focus,
+.settingForm:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #404040 inset !important;
+    -webkit-text-fill-color: white !important;
+    font-size: 1em;
+
+}

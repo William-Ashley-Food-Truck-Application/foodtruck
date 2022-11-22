@@ -1,0 +1,58 @@
+.admin-tab {
+    cursor: pointer;
+    list-style: none;
+}
+
+.order-history-list {
+    max-height: 40vh;
+    overflow: scroll;
+
+    color: #b2b2b2;
+}
+
+#tabs-container {
+    height: 91vh;
+}
+
+#content-container {
+    overflow: scroll;
+    height: 91vh;
+}
+
+#tabs {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+}
+
+.highlight {
+    width: 7px;
+    height: 100%;
+
+    position: relative;
+
+    left: 0;
+}
+
+.dashboard-tab {
+    background-color: #709775;
+}
+.w-25 {
+    width: 25%;
+}
+.w-33 {
+    width: 33%;
+}
+
+.w-66 {
+    width: 66%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.w-100 {
+    width: 100%;
+}
+

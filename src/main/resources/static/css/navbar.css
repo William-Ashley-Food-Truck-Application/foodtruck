@@ -100,9 +100,9 @@ nav a:hover {
 }
 
 .background-card-dark {
-    display: flex;
+    /*display: flex;*/
     background-color: #404040;
-    margin: 1em;
+    /*margin: 1em;*/
 }
 
 .register-card{

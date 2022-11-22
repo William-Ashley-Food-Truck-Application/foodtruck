@@ -22,7 +22,7 @@ function productHtml(product) {
     //language=html
     console.log(product.name)
     return `
-        <div class="card background-card-dark" style="width: 18rem;">
+        <div class="card background-card-dark m-3" style="width: 18rem;">
             <img src=${product.image} class="card-img-top" alt="..." width="400px" height="250px">
             <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>

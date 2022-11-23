@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @AllArgsConstructor
@@ -49,6 +51,26 @@ public class OrdersController {
     @GetMapping("/getById/{id}")
     public Order getById(@PathVariable Long id) {
         return ordersRepository.findById(id).get();
+    }
+
+    @GetMapping("/lastSevenDaySales")
+    public Collection<Double> getLastSevenDaySales() {
+        Collection<Double> weeklySales = new ArrayList<>();
+
+        for (int i = 7; i >= 0; i--) {
+            LocalDate dateIteration = LocalDate.now().minusDays(i);
+
+            Double salesOnCurrentDay = ordersRepository.getTotalPriceByDate(dateIteration);
+
+            if (salesOnCurrentDay == null) {
+                weeklySales.add(0.00);
+                continue;
+            }
+
+            weeklySales.add(salesOnCurrentDay);
+        }
+
+        return weeklySales;
     }
 
     @PostMapping
